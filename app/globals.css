@@ -43,7 +43,7 @@ body{background:var(--bg)}
 .fashion-meta{position:absolute;left:1rem;bottom:1rem;color:#fff;mix-blend-mode:difference}
 .fashion-meta h3{font-family:var(--font-display);font-size:2.5rem;font-weight:400;margin:0}
 
-/* —— motion + enriched sections —— */
+/* — motion + enriched sections — */
 .reveal{opacity:0;transform:translateY(20px);animation:revealIn .9s cubic-bezier(.2,.7,.2,1) forwards}
 .reveal-delay-1{animation-delay:.14s}.reveal-delay-2{animation-delay:.28s}
 .stagger>*{opacity:0;transform:translateY(16px);animation:revealIn .8s cubic-bezier(.2,.7,.2,1) forwards}
