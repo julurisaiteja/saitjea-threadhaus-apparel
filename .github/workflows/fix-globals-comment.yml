@@ -1,0 +1,43 @@
+name: Fix globals comment
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/fix-globals-comment.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Normalize motion comment
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          p = Path('app/globals.css')
+          t = p.read_text(encoding='utf-8')
+          em = '\u2014'
+          new = '/* -- motion + enriched sections -- */'
+          for old in (f'/* {em} motion + enriched sections {em} */', f'/* {em}{em} motion + enriched sections {em}{em} */'):
+              if old in t:
+                  p.write_text(t.replace(old, new), encoding='utf-8')
+                  print('replaced', repr(old))
+                  break
+          else:
+              if new in t:
+                  print('already normalized')
+              else:
+                  raise SystemExit('pattern not found')
+          PY
+      - name: Commit and cleanup
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add app/globals.css
+          git commit -m "Normalize globals.css motion comment to ASCII hyphens" || exit 0
+          git push
+          rm -f .github/workflows/fix-globals-comment.yml
+          git add -A
+          git commit -m "Remove one-shot fix-globals workflow" || exit 0
+          git push
