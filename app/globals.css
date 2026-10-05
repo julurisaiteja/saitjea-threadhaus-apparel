@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{--bg:#fafafa;--surface:#ffffff;--text:#0d0d0d;--muted:#6b6b6b;--brand:#0d0d0d;--accent:#c9a227;--success:#2d6a4f;--danger:#9b2226;--radius:0px;--font-display:'Bodoni Moda',Georgia,serif;--font-body:'Manrope',system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden}
+.font-display{font-family:var(--font-display)}.text-muted{color:var(--muted)}.bg-surface{background:var(--surface)}
+a{color:inherit;text-decoration:none}
+.skip-link{position:absolute;left:-999px;top:0;z-index:100;background:var(--brand);color:#fff;padding:.75rem 1rem}
+.skip-link:focus{left:1rem;top:1rem}
+img{max-width:100%;display:block}
+.btn-brand,.btn-ghost{cursor:pointer;font:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:.85rem 1.35rem;font-weight:700;border:none}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .75rem;font-size:.75rem;font-weight:700}
+.stars{color:var(--accent);letter-spacing:.05em}
+.offer-banner{text-align:center;padding:.55rem 1rem;font-size:.9rem;font-weight:700}
+.ai-fab{position:fixed;right:1rem;bottom:1rem;z-index:50;width:3.6rem;height:3.6rem;border:none;cursor:pointer;font-weight:800}
+.ai-panel{position:fixed;right:1rem;bottom:5.2rem;z-index:50;width:min(380px,calc(100vw - 2rem));max-height:min(70vh,520px);display:flex;flex-direction:column;overflow:hidden}
+.sticky-cta{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);z-index:45;display:flex;gap:.5rem;padding:.5rem}
+.card-soft{background:var(--surface)}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+body{background:var(--bg)}
+.btn-brand{background:var(--text);color:var(--bg);border-radius:0;font-weight:500;letter-spacing:.18em;text-transform:uppercase;font-size:.7rem;padding:1rem 1.75rem}
+.btn-ghost{background:transparent;border:none;border-bottom:1px solid var(--text);border-radius:0;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;padding:.5rem 0}
+.offer-banner{background:transparent;color:var(--muted);border-bottom:1px solid color-mix(in srgb,var(--muted) 30%,transparent);letter-spacing:.2em;text-transform:uppercase;font-size:.65rem;font-weight:500}
+.chip{background:transparent;border:none;border-bottom:1px solid var(--muted);border-radius:0;letter-spacing:.14em;text-transform:uppercase;font-size:.65rem;padding:.2rem 0}
+.ai-fab{background:var(--text);color:var(--bg);border-radius:0;letter-spacing:.1em;font-size:.65rem}
+.ai-panel{background:var(--bg);border:1px solid color-mix(in srgb,var(--muted) 35%,transparent);border-radius:0}
+.sticky-cta{background:var(--bg);border:1px solid color-mix(in srgb,var(--muted) 30%,transparent);border-radius:0}
+.card-soft{background:transparent;border:none;border-radius:0}
+.fashion-hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+.fashion-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.08) saturate(.9);animation:runway 35s ease-in-out infinite alternate}
+@keyframes runway{from{transform:scale(1.02)}to{transform:scale(1.12) translateY(-2%)}}
+.fashion-scrim{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.55))}
+.fashion-copy{position:relative;z-index:2;padding:2rem;width:100%;color:#fff}
+.fashion-brand{font-family:var(--font-display);font-size:clamp(5rem,16vw,12rem);line-height:.8;font-weight:400;margin:0;letter-spacing:-.04em}
+.fashion-looks{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:800px){.fashion-looks{grid-template-columns:2fr 1fr 1fr}}
+.fashion-looks a{position:relative;min-height:70vh;overflow:hidden;border-top:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+.fashion-looks img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s ease}
+.fashion-looks a:hover img{transform:scale(1.05)}
+.fashion-meta{position:absolute;left:1rem;bottom:1rem;color:#fff;mix-blend-mode:difference}
+.fashion-meta h3{font-family:var(--font-display);font-size:2.5rem;font-weight:400;margin:0}
+
+/* —— motion + enriched sections —— */
+.reveal{opacity:0;transform:translateY(20px);animation:revealIn .9s cubic-bezier(.2,.7,.2,1) forwards}
+.reveal-delay-1{animation-delay:.14s}.reveal-delay-2{animation-delay:.28s}
+.stagger>*{opacity:0;transform:translateY(16px);animation:revealIn .8s cubic-bezier(.2,.7,.2,1) forwards}
+.stagger>*:nth-child(1){animation-delay:.06s}.stagger>*:nth-child(2){animation-delay:.14s}.stagger>*:nth-child(3){animation-delay:.22s}
+.stagger>*:nth-child(4){animation-delay:.3s}.stagger>*:nth-child(5){animation-delay:.38s}.stagger>*:nth-child(6){animation-delay:.46s}
+.stagger>*:nth-child(7){animation-delay:.54s}.stagger>*:nth-child(8){animation-delay:.62s}
+@keyframes revealIn{to{opacity:1;transform:none}}
+.film-strip{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;border-block:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+.film-cell{flex:0 0 160px;scroll-snap-align:start}
+.fashion-meta-label{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500}
+
+/* shell */
+.fashion-shell-banner{padding:.65rem 1rem}
+.fashion-shell-header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+.fashion-shell-inner{max-width:80rem;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;padding:1rem 1.25rem}
+@media(max-width:767px){.fashion-shell-inner{grid-template-columns:1fr auto}.fashion-shell-nav{display:none!important}}
+.fashion-shell-mark{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.03em;line-height:1;text-align:center}
+.fashion-shell-nav{display:flex;align-items:center;gap:1.5rem}
+.fashion-shell-nav-l{justify-content:flex-start}
+.fashion-shell-nav-r{justify-content:flex-end}
+.fashion-shell-link{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.fashion-shell-link:hover{color:var(--text)}
+.fashion-shell-cart{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid var(--text);padding-bottom:.15rem}
+.fashion-shell-burger{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;background:transparent;border:none;border-bottom:1px solid var(--text);padding:.35rem 0}
+.fashion-shell-drawer{display:flex;flex-direction:column;padding:0 1.25rem 1rem}
+.fashion-shell-drawer a{padding:.9rem 0;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+.fashion-shell-footer{margin-top:0;padding:4rem 1.25rem 2rem;border-top:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+.fashion-shell-footer-grid{max-width:80rem;margin:0 auto;display:grid;gap:3rem}
+@media(min-width:800px){.fashion-shell-footer-grid{grid-template-columns:2fr 1fr 1fr}}
+.fashion-shell-footer-brand{font-family:var(--font-display);font-size:clamp(3rem,8vw,5rem);line-height:.85;margin:0;letter-spacing:-.04em}
+.fashion-shell-legal{max-width:80rem;margin:3rem auto 0;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+/* home extras */
+.fashion-process{padding:4rem 1.25rem;max-width:70rem;margin:0 auto}
+.fashion-process-grid{display:grid;gap:2.5rem}
+@media(min-width:800px){.fashion-process-grid{grid-template-columns:repeat(3,1fr);gap:3rem}}
+.fashion-process-title{font-family:var(--font-display);font-size:2rem;font-weight:400;line-height:1.1}
+.fashion-film-cell{border-right:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+.fashion-film-cell img{aspect-ratio:3/4;object-fit:cover;width:100%;filter:contrast(1.05)}
+.fashion-film-cell span{display:block;padding:.55rem .65rem;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase}
+.fashion-loyalty{max-width:70rem;margin:0 auto;padding:3.5rem 1.25rem;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:2rem;border-block:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+.fashion-loyalty-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.2rem);font-weight:400;line-height:1.1;max-width:18ch}
+.fashion-stats{display:grid;gap:2rem}
+@media(min-width:700px){.fashion-stats{grid-template-columns:repeat(3,1fr)}}
+.fashion-stat-value{font-family:var(--font-display);font-size:2.5rem;font-weight:400}
+.fashion-review{padding-top:1rem;border-top:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+
+/* shop — runway lookbook */
+.fashion-runway-shop{max-width:80rem;margin:0 auto;padding:3rem 1.25rem 5rem}
+.fashion-shop-head{margin-bottom:2.5rem;max-width:36rem}
+.fashion-shop-title{font-family:var(--font-display);font-size:clamp(3.5rem,12vw,7rem);line-height:.85;font-weight:400;letter-spacing:-.04em;margin:.5rem 0 0}
+.fashion-shop-controls{display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+@media(min-width:900px){.fashion-shop-controls{flex-direction:row;align-items:center}}
+.fashion-shop-input{flex:1;border:none;border-bottom:1px solid var(--text);background:transparent;padding:.75rem 0;font:inherit;font-size:.85rem;letter-spacing:.06em;outline:none;border-radius:0}
+.fashion-shop-cats{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem}
+.fashion-shop-cat{background:none;border:none;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:0 0 .2rem;border-bottom:1px solid transparent;cursor:pointer}
+.fashion-shop-cat.is-on{color:var(--text);border-color:var(--text)}
+.fashion-lookbook-grid{display:grid;gap:2rem 1.25rem}
+@media(min-width:700px){.fashion-lookbook-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.fashion-lookbook-grid{grid-template-columns:repeat(12,1fr)}}
+@media(min-width:1100px){
+  .fashion-look-item.span-1{grid-column:span 7}
+  .fashion-look-item.span-2{grid-column:span 5}
+  .fashion-look-item.span-3{grid-column:span 5}
+  .fashion-look-item.span-4{grid-column:span 7}
+  .fashion-look-item.span-5{grid-column:span 12}
+}
+.fashion-look-media{display:block;overflow:hidden;aspect-ratio:3/4;background:#eee}
+.fashion-look-item.span-5 .fashion-look-media{aspect-ratio:21/9}
+.fashion-look-media img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s ease}
+.fashion-look-item:hover .fashion-look-media img{transform:scale(1.04)}
+.fashion-look-bar{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-top:1rem}
+.fashion-look-name{font-family:var(--font-display);font-size:1.75rem;font-weight:400;line-height:1.05}
+.fashion-wish{background:none;border:none;font-size:1.1rem;cursor:pointer;padding:0}
+.fashion-look-blurb{margin-top:.5rem;font-size:.9rem;color:var(--muted);font-weight:300;max-width:36ch}
+
+.special-chrome{padding-bottom:1.5rem;margin-bottom:2rem;border-bottom:1px solid color-mix(in srgb,var(--muted) 25%,transparent)}
+.special-chrome h1{font-family:var(--font-display);font-weight:400;letter-spacing:-.03em}
