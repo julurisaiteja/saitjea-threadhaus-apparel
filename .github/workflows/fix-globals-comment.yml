@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Normalize motion comment
         run: |
           python3 <<'PY'
@@ -34,10 +36,13 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git pull --rebase origin main
           git add app/globals.css
-          git commit -m "Normalize globals.css motion comment to ASCII hyphens" || exit 0
+          git commit -m "Normalize globals.css motion comment to ASCII hyphens" || echo 'no globals change'
+          git pull --rebase origin main
           git push
           rm -f .github/workflows/fix-globals-comment.yml
           git add -A
-          git commit -m "Remove one-shot fix-globals workflow" || exit 0
+          git commit -m "Remove one-shot fix-globals workflow" || echo 'no workflow cleanup'
+          git pull --rebase origin main
           git push
