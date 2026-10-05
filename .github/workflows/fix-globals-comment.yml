@@ -13,8 +13,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Normalize motion comment
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Normalize, commit, push, cleanup
         run: |
+          set -euo pipefail
           python3 <<'PY'
           from pathlib import Path
           p = Path('app/globals.css')
@@ -32,17 +34,19 @@ jobs:
               else:
                   raise SystemExit('pattern not found')
           PY
-      - name: Commit and cleanup
-        run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git pull --rebase origin main
           git add app/globals.css
-          git commit -m "Normalize globals.css motion comment to ASCII hyphens" || echo 'no globals change'
+          if ! git diff --cached --quiet; then
+            git commit -m "Normalize globals.css motion comment to ASCII hyphens"
+          fi
+          git fetch origin main
           git pull --rebase origin main
-          git push
+          git push origin main
           rm -f .github/workflows/fix-globals-comment.yml
           git add -A
-          git commit -m "Remove one-shot fix-globals workflow" || echo 'no workflow cleanup'
-          git pull --rebase origin main
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "Remove one-shot fix-globals workflow"
+            git pull --rebase origin main
+            git push origin main
+          fi
